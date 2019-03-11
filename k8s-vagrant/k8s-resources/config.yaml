@@ -1,0 +1,6 @@
+apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+kubeProxy:
+  config:
+    mode: userspace
+kubernetesVersion: v1.7.5

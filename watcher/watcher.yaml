@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: watcher
+  labels:
+    k8s-app: watcher
+  namespace : kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - name: watcher
+    image: watcher:1.0v
+    env:
+    - name: odl_ip_adress
+      value: "http://{odl-ipAddress}:8181"
+    - name: user_value
+      value: ""    # set the odl username 
+    - name: password_value   
+      value: ""   # set the odl password 
+    volumeMounts:
+    - mountPath: /root/.kube/
+      name: kubeconfig
+      readOnly: true
+  volumes:
+       - name: kubeconfig
+         hostPath:
+           path: /home/vagrant/.kube/ # This directory needs to change based on the deployement

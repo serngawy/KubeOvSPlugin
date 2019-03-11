@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pod-test-3
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+      - name: apache-web-server-1
+        image: jonlangemak/web_server_1
+        ports:
+        - containerPort: 80
+          name: web-tcp-80
+          protocol: TCP
+      - name: apache-web-server-3
+        image: jonlangemak/web_server_3_8080
+        ports:
+        - containerPort: 8080
+          name: web-tcp-8080
+          protocol: TCP

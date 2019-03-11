@@ -1,0 +1,6 @@
+kube:
+    config: ~/.kube/config
+odl:
+    host: http://192.168.33.1:8181
+    user: admin
+    password: admin

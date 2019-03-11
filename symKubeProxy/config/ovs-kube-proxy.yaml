@@ -1,0 +1,72 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+    labels:
+      k8s-app: ovs-kube-proxy
+    name: ovs-kube-proxy
+    namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      k8s-app: ovs-kube-proxy
+  template:
+    metadata:
+      labels:
+        k8s-app: ovs-kube-proxy
+    spec:
+      hostNetwork: true
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      initContainers:
+        - name: sym-cni
+          image: sym-cni:v1.0
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/cni/bin/
+            name: cnibin
+            readOnly: false
+          - mountPath: /etc/cni/net.d/
+            name: kubeproxy
+            readOnly: false
+          - mountPath: /root/.kube/
+            name: kubeconfig
+            readOnly: true
+      containers:
+        - name: ovs-kube-proxy
+          image: symkubeproxy:v1.1
+          env:
+           - name: confile
+             value: "/etc/cni/net.d/sym-cni.conf" # It may need to change based on the deployment env.
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true      
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /root/.kube/
+            name: kubeconfig
+            readOnly: true
+          - mountPath: /etc/cni/net.d/
+            name: kubeproxy
+            readOnly: true
+          - mountPath: /var/run/openvswitch/
+            name: ovs
+            readOnly: false
+      volumes:
+       - name: kubeconfig
+         hostPath:
+           path: /home/vagrant/.kube/ # This directory needs to change based on the deployement
+       - name: ovs
+         hostPath:
+           path: /var/run/openvswitch/
+       - name: kubeproxy
+         hostPath:
+           path: /etc/cni/net.d/
+       - name: cnibin
+         hostPath:
+           path: /opt/cni/bin/
