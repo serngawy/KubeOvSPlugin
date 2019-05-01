@@ -22,7 +22,7 @@ import (
 
 const (
 	syncTime = 5 * time.Minute
-	cniFile = "/etc/cni/net.d/sym-cni.conf"
+	cniFile = "/etc/cni/net.d/ovs-cni.conf"
 )
 
 func main() {

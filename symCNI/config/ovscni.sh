@@ -1,9 +1,9 @@
 #!/bin/sh
-cp symOvSCNI /opt/cni/bin/
+cp OvSCNI /opt/cni/bin/
 SERVER=$(hostname)
 var=$(kubectl describe node $(echo $SERVER | tr '[:upper:]' '[:lower:]') | grep PodCIDR | awk '{ print $2 }' | cut -d"." -f1-3)
 echo "node-name: " $SERVER " Podcidr: " $var .0/24
-cat << CNI > /etc/cni/net.d/sym-cni.conf
+cat << CNI > /etc/cni/net.d/ovs-cni.conf
 {
     "cniVersion":"0.3.0",
     "name":"sym-cni",

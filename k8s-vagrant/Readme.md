@@ -32,12 +32,12 @@
         - Note: in the minion VMs you will use the join command instead ex:
           - vagrant@k8se2eminion1:~$ sudo kubeadm join --token {given_token} 192.168.30.11:6443 --ignore-preflight-errors Swap
 
-  - In order to setup the symKubeProxy run the following command
+  - In order to setup the ovsKubeProxy run the following command
      - First, we will need to copy the kubeconfig file accross all nodes:
        - vagrant@k8se2emaster:~$ scp ~/.kube/config vagrant@192.168.30.12:~/.kube/ 
        - vagrant@k8se2emaster:~$ scp ~/.kube/config vagrant@192.168.30.13:~/.kube/
        - Note: password is vagrant
-     - Then run the follwoing command to create the symkubeproxy and it's networking plugin
+     - Then run the follwoing command to create the ovskubeproxy and it's networking plugin
        - vagrant@k8se2emaster:~$ kubectl create -f /vagrant/config/ovs-kube-proxy.yaml
 
   - Run the following command to check kube-system pods
@@ -73,6 +73,6 @@
        - vagrant@k8se2eminion1:~$ sudo ovs-vsctl show
          - you should see the pods ports attached to br-int
        - vagrant@k8se2eminion1:~$ sudo ovs-ofctl dump-flows br-int
-         - you should see the flow rules that symkubeproxy push to manage pod communications
+         - you should see the flow rules that ovskubeproxy push to manage pod communications
          - note: check the flow rules before and after testing the service communications step (6)
        - vagrant@k8se2eminion1:~$ sudo ovs-ofctl dump-flows br-ext

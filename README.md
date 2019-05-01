@@ -7,8 +7,8 @@ Currently we deploy kubernetes on Symkloud using Flannel and Canal as default ne
 
 The framework will be consist of 2 modules
 
-1- Symkloud CNI.
-2- Symkloud KubeProxy.
+1- OvS CNI.
+2- OvS KubeProxy.
 
 **1- Symkloud CNI (Sym-CNI)**
 
