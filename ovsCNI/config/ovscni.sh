@@ -6,8 +6,8 @@ echo "node-name: " $SERVER " Podcidr: " $var .0/24
 cat << CNI > /etc/cni/net.d/ovs-cni.conf
 {
     "cniVersion":"0.3.0",
-    "name":"sym-cni",
-    "type":"symOvSCNI",
+    "name":"ovs-cni",
+    "type":"OvSCNI",
     "ovsBridge":"br-int",
     "ovsExtBridge":"br-ext",
     "ctlrPort":6653,
