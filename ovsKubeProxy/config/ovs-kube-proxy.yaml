@@ -38,7 +38,7 @@ spec:
             readOnly: true
       containers:
         - name: ovs-kube-proxy
-          image: ovskubeproxy:v1.1
+          image: ovskubeproxy:v1.0
           env:
            - name: confile
              value: "/etc/cni/net.d/ovs-cni.conf" # It may need to change based on the deployment env.

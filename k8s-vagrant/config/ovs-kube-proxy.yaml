@@ -19,8 +19,8 @@ spec:
       - operator: Exists
         effect: NoSchedule
       initContainers:
-        - name: sym-cni
-          image: melserngawy/sym-cni:v1.0
+        - name: ovs-cni
+          image: melserngawy/ovs-cni:v1.0
           imagePullPolicy: Always
           securityContext:
             privileged: true
@@ -38,10 +38,10 @@ spec:
             readOnly: true
       containers:
         - name: ovs-kube-proxy
-          image: melserngawy/symkubeproxy:v1.1
+          image: melserngawy/ovskubeproxy:v1.0
           env:
            - name: confile
-             value: "/etc/cni/net.d/sym-cni.conf" # It may need to change based on the deployment env.
+             value: "/etc/cni/net.d/ovs-cni.conf" # It may need to change based on the deployment env.
           imagePullPolicy: Always
           securityContext:
             privileged: true      
