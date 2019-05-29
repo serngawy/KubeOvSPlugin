@@ -11,7 +11,6 @@ bin
 .checkstyle
 .fbExcludeFilterFile
 .factorypath
-.fbExcludeFilterFile
 vendor
 classes
 META-INF

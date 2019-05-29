@@ -4,9 +4,6 @@ KubeOvSPlugin project aims to integrate Kubernetes networking with Open vSwitch 
 
 ## KubeOvSPlugin Modules
 
-1- OvS CNI.
-2- OvS KubeProxy.
-
 **1- OvS CNI (ovsCNI)**
 
 OvS CNI is responsible for attaching k8s pods to OvS bridge (br-int) that is used on k8s worker nodes.
@@ -19,8 +16,8 @@ assigned to the k8s worker nodes.
 OvS KubeProxy is responsible for setting up L2 & L3 networking on the k8s cluster.
 OvS KubeProxy leverages Openflow flow rules to setup end 2 end communications between pods, services and external networks.
 
-## COE deployment diagrams
+## KubeOvSPlugin deployment diagrams
 
 **KubeOvSPlugin Architecture:**
  
-![picture](docs/COE_Architecture.jpg "")
+![picture](docs/KubeOvSPlugin_Architecture.jpg "")
